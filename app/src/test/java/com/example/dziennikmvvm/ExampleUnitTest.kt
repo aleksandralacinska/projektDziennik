@@ -1,4 +1,4 @@
-package com.example.dziennik
+package com.example.dziennikmvvm
 
 import org.junit.Test
 

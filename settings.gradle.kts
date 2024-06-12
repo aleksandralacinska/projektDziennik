@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Dziennik"
+rootProject.name = "Dziennik MVVM"
 include(":app")
  
