@@ -9,11 +9,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.dziennikmvvm.R
+import com.example.dziennikmvvm.viewmodel.DziennikViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private val correctPin = "1234"
+    private lateinit var viewModel: DziennikViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +27,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        viewModel = ViewModelProvider(this).get(DziennikViewModel::class.java)
 
         val editTextPin = findViewById<EditText>(R.id.editTextPin)
         val buttonSubmit = findViewById<Button>(R.id.buttonSubmit)
