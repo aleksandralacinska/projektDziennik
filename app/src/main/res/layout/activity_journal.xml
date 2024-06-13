@@ -18,4 +18,17 @@
         app:titleTextColor="@android:color/white"
         app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
         app:menu="@menu/menu_journal" />
+
+    <!-- Dodanie przycisku "+" na dole ekranu -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/add_entry"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
