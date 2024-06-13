@@ -10,6 +10,9 @@ interface EntryDao {
     @Query("SELECT * FROM entries WHERE date = :date")
     fun getEntriesByDate(date: Date): List<Entry>
 
+    @Query("SELECT * FROM entries")
+    fun getAllEntries(): List<Entry>
+
     @Insert
     fun insert(entry: Entry)
 }

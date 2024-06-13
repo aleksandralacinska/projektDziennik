@@ -7,11 +7,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dziennikmvvm.R
 import com.example.dziennikmvvm.model.Entry
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
 
     inner class EntryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textViewContent: TextView = view.findViewById(R.id.textViewContent)
+        val textViewDate: TextView = view.findViewById(R.id.textViewDate)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {
@@ -22,6 +25,8 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
     override fun onBindViewHolder(holder: EntryViewHolder, position: Int) {
         val entry = entries[position]
         holder.textViewContent.text = entry.content
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
+        holder.textViewDate.text = dateFormat.format(entry.date)
     }
 
     override fun getItemCount(): Int {
