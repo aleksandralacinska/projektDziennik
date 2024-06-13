@@ -10,11 +10,17 @@ import com.example.dziennikmvvm.model.Entry
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
+class EntriesAdapter(private var entries: List<Entry>, private val onEntryClick: (Entry) -> Unit) : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
 
     inner class EntryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textViewContent: TextView = view.findViewById(R.id.textViewContent)
         val textViewDate: TextView = view.findViewById(R.id.textViewDate)
+
+        init {
+            view.setOnClickListener {
+                onEntryClick(entries[adapterPosition])
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {

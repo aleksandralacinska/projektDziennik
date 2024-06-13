@@ -10,7 +10,6 @@ import androidx.room.Room
 import com.example.dziennikmvvm.R
 import com.example.dziennikmvvm.model.AppDatabase
 import com.example.dziennikmvvm.model.Entry
-import com.applandeo.materialcalendarview.CalendarView // Zmiana importu
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,7 +32,11 @@ class DayActivity : AppCompatActivity() {
         recyclerViewEntries = findViewById(R.id.recyclerViewEntries)
         recyclerViewEntries.layoutManager = LinearLayoutManager(this)
 
-        entriesAdapter = EntriesAdapter(emptyList())
+        entriesAdapter = EntriesAdapter(emptyList()) { entry ->
+            val intent = Intent(this, AddEntryActivity::class.java)
+            intent.putExtra("entry", entry)
+            startActivity(intent)
+        }
         recyclerViewEntries.adapter = entriesAdapter
 
         loadEntries(date)

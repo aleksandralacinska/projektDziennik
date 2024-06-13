@@ -25,7 +25,6 @@ class JournalActivity : AppCompatActivity() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        // Obsługa kliknięcia przycisku "+"
         val fabAddEntry = findViewById<FloatingActionButton>(R.id.fab_add_entry)
         fabAddEntry.setOnClickListener {
             val intent = Intent(this, AddEntryActivity::class.java)
@@ -35,7 +34,11 @@ class JournalActivity : AppCompatActivity() {
         recyclerViewEntries = findViewById(R.id.recyclerViewEntries)
         recyclerViewEntries.layoutManager = LinearLayoutManager(this)
 
-        entriesAdapter = EntriesAdapter(emptyList())
+        entriesAdapter = EntriesAdapter(emptyList()) { entry ->
+            val intent = Intent(this, AddEntryActivity::class.java)
+            intent.putExtra("entry", entry)
+            startActivity(intent)
+        }
         recyclerViewEntries.adapter = entriesAdapter
 
         loadEntries()
@@ -54,7 +57,6 @@ class JournalActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_right_icon -> {
-                // Start CalendarActivity when the icon is clicked
                 val intent = Intent(this, CalendarActivity::class.java)
                 startActivity(intent)
                 true
@@ -70,8 +72,8 @@ class JournalActivity : AppCompatActivity() {
         ).build()
 
         Thread {
-            val entries = db.entryDao().getAllEntries().toMutableList() // Konwertuj na mutowalną listę
-            entries.sortByDescending { it.date } // Sortowanie wpisów w odwrotnej kolejności chronologicznej
+            val entries = db.entryDao().getAllEntries().toMutableList()
+            entries.sortByDescending { it.date }
             runOnUiThread {
                 entriesAdapter.updateEntries(entries)
             }

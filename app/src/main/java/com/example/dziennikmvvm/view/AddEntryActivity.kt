@@ -20,6 +20,8 @@ import java.util.*
 
 class AddEntryActivity : AppCompatActivity() {
 
+    private var entryId: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_entry)
@@ -27,11 +29,9 @@ class AddEntryActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        // Pobierz aktualną datę i ustaw jako tytuł Toolbar
         val currentDate = getCurrentDate()
         toolbar.title = currentDate
 
-        // Obsługa kliknięcia przycisku "powrót"
         toolbar.setNavigationOnClickListener {
             finish()
         }
@@ -39,6 +39,8 @@ class AddEntryActivity : AppCompatActivity() {
         val mainLayout = findViewById<ConstraintLayout>(R.id.mainLayout)
         val editTextEntryContent = findViewById<EditText>(R.id.editTextEntryContent)
         val buttonSaveEntry = findViewById<Button>(R.id.buttonSaveEntry)
+        val buttonUpdateEntry = findViewById<Button>(R.id.buttonUpdateEntry)
+        val buttonDeleteEntry = findViewById<Button>(R.id.buttonDeleteEntry)
 
         mainLayout.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
@@ -60,6 +62,29 @@ class AddEntryActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Treść wpisu nie może być pusta", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        buttonUpdateEntry.setOnClickListener {
+            val content = editTextEntryContent.text.toString()
+            if (content.isNotBlank()) {
+                updateEntry(content)
+            } else {
+                Toast.makeText(this, "Treść wpisu nie może być pusta", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        buttonDeleteEntry.setOnClickListener {
+            if (entryId != -1) {
+                deleteEntry()
+            }
+        }
+
+        val entry = intent.getParcelableExtra<Entry>("entry")
+        entry?.let {
+            entryId = it.id
+            editTextEntryContent.setText(it.content)
+            buttonUpdateEntry.visibility = View.VISIBLE
+            buttonDeleteEntry.visibility = View.VISIBLE
         }
     }
 
@@ -87,7 +112,41 @@ class AddEntryActivity : AppCompatActivity() {
             db.entryDao().insert(newEntry)
             runOnUiThread {
                 Toast.makeText(this, "Wpis został zapisany", Toast.LENGTH_SHORT).show()
-                finish() // Zamknij aktywność po zapisaniu wpisu
+                finish()
+            }
+        }.start()
+    }
+
+    private fun updateEntry(content: String) {
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "journal-database"
+        ).build()
+
+        val updatedEntry = Entry(id = entryId, date = Date(), content = content)
+
+        Thread {
+            db.entryDao().update(updatedEntry)
+            runOnUiThread {
+                Toast.makeText(this, "Wpis został zaktualizowany", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+        }.start()
+    }
+
+    private fun deleteEntry() {
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "journal-database"
+        ).build()
+
+        val entryToDelete = Entry(id = entryId, date = Date(), content = "")
+
+        Thread {
+            db.entryDao().delete(entryToDelete)
+            runOnUiThread {
+                Toast.makeText(this, "Wpis został usunięty", Toast.LENGTH_SHORT).show()
+                finish()
             }
         }.start()
     }
