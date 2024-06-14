@@ -6,21 +6,22 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textViewContent"
+        android:id="@+id/textViewDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Entry Content"
+        android:text="Entry Date"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="8dp"/>
 
     <TextView
-        android:id="@+id/textViewDate"
+        android:id="@+id/textViewContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Entry Date"
-        app:layout_constraintTop_toBottomOf="@id/textViewContent"
+        android:text="Entry Content"
+        app:layout_constraintTop_toBottomOf="@id/textViewDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="8dp"/>

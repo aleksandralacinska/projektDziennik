@@ -24,9 +24,9 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
 
     override fun onBindViewHolder(holder: EntryViewHolder, position: Int) {
         val entry = entries[position]
-        holder.textViewContent.text = entry.content
         val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
         holder.textViewDate.text = dateFormat.format(entry.date)
+        holder.textViewContent.text = entry.content
     }
 
     override fun getItemCount(): Int {
