@@ -23,9 +23,15 @@ class CalendarActivity : AppCompatActivity() {
 
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
 
-        // Przykładowa konfiguracja kalendarza
-        val today = Calendar.getInstance()
-        calendarView.setMinimumDate(today)
-        calendarView.setMaximumDate(today)
+        // Konfiguracja kalendarza
+        val minDate = Calendar.getInstance().apply {
+            set(Calendar.YEAR, 2000)
+        }
+        val maxDate = Calendar.getInstance().apply {
+            set(Calendar.YEAR, 3000)
+        }
+
+        calendarView.setMinimumDate(minDate)
+        calendarView.setMaximumDate(maxDate)
     }
 }
