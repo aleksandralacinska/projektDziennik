@@ -3,8 +3,12 @@ package com.example.dziennikmvvm.view
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.room.Room
 import com.applandeo.materialcalendarview.CalendarView
+import com.applandeo.materialcalendarview.EventDay
 import com.example.dziennikmvvm.R
+import com.example.dziennikmvvm.model.AppDatabase
+import com.example.dziennikmvvm.model.Entry
 import java.util.*
 
 class CalendarActivity : AppCompatActivity() {
@@ -33,5 +37,26 @@ class CalendarActivity : AppCompatActivity() {
 
         calendarView.setMinimumDate(minDate)
         calendarView.setMaximumDate(maxDate)
+
+        loadEntriesAndMarkDates(calendarView)
+    }
+
+    private fun loadEntriesAndMarkDates(calendarView: CalendarView) {
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "journal-database"
+        ).build()
+
+        Thread {
+            val entries = db.entryDao().getAllEntries()
+            val markedDates = entries.map { entry ->
+                val calendar = Calendar.getInstance()
+                calendar.time = entry.date
+                EventDay(calendar, com.google.android.material.R.drawable.ic_mtrl_checked_circle)
+            }
+            runOnUiThread {
+                calendarView.setEvents(markedDates)
+            }
+        }.start()
     }
 }
