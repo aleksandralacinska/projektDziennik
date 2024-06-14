@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import java.util.Date
+import androidx.room.Delete
 
 @Dao
 interface EntryDao {
@@ -18,6 +19,9 @@ interface EntryDao {
 
     @Query("UPDATE entries SET content = :content WHERE id = :entryId")
     fun updateEntryContent(entryId: Int, content: String)
+
+    @Delete
+    fun delete(entry: Entry)
 
     @Insert
     fun insert(entry: Entry)

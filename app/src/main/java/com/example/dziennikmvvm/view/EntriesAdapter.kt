@@ -6,9 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Button
 import android.content.Intent
+import android.app.AlertDialog
+import android.content.Context
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dziennikmvvm.R
 import com.example.dziennikmvvm.model.Entry
+import com.example.dziennikmvvm.model.AppDatabase
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,6 +23,7 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
         val textViewContent: TextView = view.findViewById(R.id.textViewContent)
         val textViewDate: TextView = view.findViewById(R.id.textViewDate)
         val buttonEditEntry: Button = view.findViewById(R.id.buttonEditEntry)
+        val buttonDeleteEntry: Button = view.findViewById(R.id.buttonDeleteEntry)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {
@@ -37,6 +43,11 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
             intent.putExtra("entryId", entry.id)
             context.startActivity(intent)
         }
+
+        holder.buttonDeleteEntry.setOnClickListener {
+            showDeleteConfirmationDialog(holder.itemView.context, entry, position)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -46,5 +57,32 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
     fun updateEntries(newEntries: List<Entry>) {
         entries = newEntries
         notifyDataSetChanged()
+    }
+
+    private fun showDeleteConfirmationDialog(context: Context, entry: Entry, position: Int) {
+        AlertDialog.Builder(context).apply {
+            setTitle("Usuń wpis")
+            setMessage("Czy na pewno chcesz usunąć wpis?")
+            setPositiveButton("Tak") { _, _ ->
+                deleteEntry(context, entry, position)
+            }
+            setNegativeButton("Nie", null)
+        }.create().show()
+    }
+
+    private fun deleteEntry(context: Context, entry: Entry, position: Int) {
+        val db = Room.databaseBuilder(
+            context.applicationContext,
+            AppDatabase::class.java, "journal-database"
+        ).build()
+
+        Thread {
+            db.entryDao().delete(entry)
+            (context as? JournalActivity)?.runOnUiThread {
+                val updatedEntries = entries.toMutableList()
+                updatedEntries.removeAt(position)
+                updateEntries(updatedEntries)
+            }
+        }.start()
     }
 }
