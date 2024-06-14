@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Button
+import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dziennikmvvm.R
 import com.example.dziennikmvvm.model.Entry
@@ -15,6 +17,7 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
     inner class EntryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textViewContent: TextView = view.findViewById(R.id.textViewContent)
         val textViewDate: TextView = view.findViewById(R.id.textViewDate)
+        val buttonEditEntry: Button = view.findViewById(R.id.buttonEditEntry)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {
@@ -27,6 +30,13 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
         val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
         holder.textViewDate.text = dateFormat.format(entry.date)
         holder.textViewContent.text = entry.content
+
+        holder.buttonEditEntry.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, EditEntryActivity::class.java)
+            intent.putExtra("entryId", entry.id)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
