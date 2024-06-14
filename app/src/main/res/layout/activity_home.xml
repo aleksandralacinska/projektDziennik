@@ -7,25 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".view.HomeActivity">
 
-    <TextView
-        android:id="@+id/welcomeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Witaj w aplikacji Dziennik!"
-        app:layout_constraintBottom_toTopOf="@id/logoImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"/>
-
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:src="@drawable/diary"
-        app:layout_constraintTop_toBottomOf="@id/welcomeTextView"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.6"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Witaj w aplikacji Dziennik!"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/logoImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
