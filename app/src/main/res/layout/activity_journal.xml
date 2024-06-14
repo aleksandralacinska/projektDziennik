@@ -19,7 +19,6 @@
         app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
         app:menu="@menu/menu_journal" />
 
-    <!-- Dodanie przycisku "+" na dole ekranu -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_entry"
         android:layout_width="wrap_content"
@@ -32,7 +31,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Dodanie RecyclerView do wyświetlania wpisów -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewEntries"
         android:layout_width="0dp"
