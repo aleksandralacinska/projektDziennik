@@ -16,7 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:title="Dziennik"
         app:titleTextColor="@android:color/white"
-        app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
         app:menu="@menu/menu_journal" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
