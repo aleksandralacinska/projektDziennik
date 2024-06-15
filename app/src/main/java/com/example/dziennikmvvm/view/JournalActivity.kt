@@ -1,6 +1,5 @@
 package com.example.dziennikmvvm.view
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -13,7 +12,6 @@ import com.example.dziennikmvvm.R
 import com.example.dziennikmvvm.model.AppDatabase
 import com.example.dziennikmvvm.model.Entry
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.util.*
 
 
 class JournalActivity : AppCompatActivity() {
@@ -28,7 +26,6 @@ class JournalActivity : AppCompatActivity() {
         setContentView(R.layout.activity_journal)
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-
 
         // Obsługa kliknięcia przycisku "+"
         val fabAddEntry = findViewById<FloatingActionButton>(R.id.fab_add_entry)
@@ -65,7 +62,6 @@ class JournalActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_right_icon -> {
-                // Start CalendarActivity when the icon is clicked
                 val intent = Intent(this, CalendarActivity::class.java)
                 startActivity(intent)
                 true
@@ -83,8 +79,8 @@ class JournalActivity : AppCompatActivity() {
 
 
         Thread {
-            val entries = db.entryDao().getAllEntries().toMutableList() // Konwertuj na mutowalną listę
-            entries.sortByDescending { it.date } // Sortowanie wpisów w odwrotnej kolejności chronologicznej
+            val entries = db.entryDao().getAllEntries().toMutableList()
+            entries.sortByDescending { it.date }
             runOnUiThread {
                 entriesAdapter.updateEntries(entries)
             }

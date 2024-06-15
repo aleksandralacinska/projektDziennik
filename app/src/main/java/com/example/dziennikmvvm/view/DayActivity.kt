@@ -1,6 +1,5 @@
 package com.example.dziennikmvvm.view
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
@@ -11,7 +10,6 @@ import androidx.room.Room
 import com.example.dziennikmvvm.R
 import com.example.dziennikmvvm.model.AppDatabase
 import com.example.dziennikmvvm.model.Entry
-import com.applandeo.materialcalendarview.CalendarView // Zmiana importu
 import java.text.SimpleDateFormat
 import java.util.*
 

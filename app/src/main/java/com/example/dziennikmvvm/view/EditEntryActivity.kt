@@ -15,6 +15,7 @@ import java.util.*
 class EditEntryActivity : AppCompatActivity() {
 
     private var entryId: Int = 0
+    private lateinit var editTextEntryTitle: EditText
     private lateinit var editTextEntryContent: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,17 +31,19 @@ class EditEntryActivity : AppCompatActivity() {
             finish()
         }
 
+        editTextEntryTitle = findViewById(R.id.editTextEntryTitle)
         editTextEntryContent = findViewById(R.id.editTextEntryContent)
         val buttonSaveEntry = findViewById<Button>(R.id.buttonSaveEntry)
 
         loadEntry(entryId)
 
         buttonSaveEntry.setOnClickListener {
+            val title = editTextEntryTitle.text.toString()
             val content = editTextEntryContent.text.toString()
             if (content.isNotBlank()) {
-                updateEntry(entryId, content)
+                updateEntry(entryId, title, content)
             } else {
-                Toast.makeText(this, "Treść wpisu nie może być pusta", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Tytuł i treść wpisu nie mogą być puste", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -54,19 +57,20 @@ class EditEntryActivity : AppCompatActivity() {
         Thread {
             val entry = db.entryDao().getEntryById(entryId)
             runOnUiThread {
+                editTextEntryTitle.setText(entry?.title)
                 editTextEntryContent.setText(entry?.content)
             }
         }.start()
     }
 
-    private fun updateEntry(entryId: Int, content: String) {
+    private fun updateEntry(entryId: Int, title: String, content: String) {
         val db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "journal-database"
         ).build()
 
         Thread {
-            db.entryDao().updateEntryContent(entryId, content)
+            db.entryDao().updateEntry(entryId, title, content)
             runOnUiThread {
                 Toast.makeText(this, "Wpis został zaktualizowany", Toast.LENGTH_SHORT).show()
                 finish()
