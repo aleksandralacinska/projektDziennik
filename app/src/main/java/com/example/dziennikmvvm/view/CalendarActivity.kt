@@ -52,7 +52,7 @@ class CalendarActivity : AppCompatActivity() {
             val markedDates = entries.map { entry ->
                 val calendar = Calendar.getInstance()
                 calendar.time = entry.date
-                EventDay(calendar, com.google.android.material.R.drawable.ic_mtrl_checked_circle)
+                EventDay(calendar, R.drawable.ic_mtrl_checked_circle)
             }
             runOnUiThread {
                 calendarView.setEvents(markedDates)

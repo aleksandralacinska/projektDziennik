@@ -1,5 +1,6 @@
 package com.example.dziennikmvvm.view
 
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,9 @@ import com.example.dziennikmvvm.model.AppDatabase
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EntriesAdapter(private var entries: List<Entry>, private val onEntryClick: (Entry) -> Unit) : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
+
+class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
+
 
     inner class EntryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textViewContent: TextView = view.findViewById(R.id.textViewContent)
@@ -26,16 +29,19 @@ class EntriesAdapter(private var entries: List<Entry>, private val onEntryClick:
         val buttonDeleteEntry: Button = view.findViewById(R.id.buttonDeleteEntry)
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_entry, parent, false)
         return EntryViewHolder(view)
     }
+
 
     override fun onBindViewHolder(holder: EntryViewHolder, position: Int) {
         val entry = entries[position]
         val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
         holder.textViewDate.text = dateFormat.format(entry.date)
         holder.textViewContent.text = entry.content
+
 
         holder.buttonEditEntry.setOnClickListener {
             val context = holder.itemView.context
@@ -44,20 +50,25 @@ class EntriesAdapter(private var entries: List<Entry>, private val onEntryClick:
             context.startActivity(intent)
         }
 
+
         holder.buttonDeleteEntry.setOnClickListener {
             showDeleteConfirmationDialog(holder.itemView.context, entry, position)
         }
 
+
     }
+
 
     override fun getItemCount(): Int {
         return entries.size
     }
 
+
     fun updateEntries(newEntries: List<Entry>) {
         entries = newEntries
         notifyDataSetChanged()
     }
+
 
     private fun showDeleteConfirmationDialog(context: Context, entry: Entry, position: Int) {
         AlertDialog.Builder(context).apply {
@@ -70,11 +81,13 @@ class EntriesAdapter(private var entries: List<Entry>, private val onEntryClick:
         }.create().show()
     }
 
+
     private fun deleteEntry(context: Context, entry: Entry, position: Int) {
         val db = Room.databaseBuilder(
             context.applicationContext,
             AppDatabase::class.java, "journal-database"
         ).build()
+
 
         Thread {
             db.entryDao().delete(entry)

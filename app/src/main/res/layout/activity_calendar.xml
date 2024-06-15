@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.CalendarActivity">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -17,6 +18,7 @@
         app:title="Kalendarz"
         app:titleTextColor="@android:color/white"
         app:navigationIcon="@android:drawable/ic_menu_revert"/>
+
 
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendarView"

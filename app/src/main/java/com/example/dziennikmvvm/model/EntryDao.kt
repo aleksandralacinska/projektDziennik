@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import java.util.Date
-import androidx.room.Delete
 
 @Dao
 interface EntryDao {
@@ -30,6 +29,4 @@ interface EntryDao {
     @Update
     fun update(entry: Entry)
 
-    @Delete
-    fun delete(entry: Entry)
 }
