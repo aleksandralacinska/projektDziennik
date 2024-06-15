@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/buttonSaveEntry"
-        android:layout_margin="16dp"/>
+        android:layout_margin="@dimen/margin_standard"/>
 
     <Button
         android:id="@+id/buttonSaveEntry"
@@ -38,5 +38,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"/>
+        android:layout_margin="@dimen/margin_standard"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

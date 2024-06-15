@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/buttonSaveEntry"
-        android:layout_margin="16dp"/>
+        android:layout_margin="@dimen/margin_standard"/>
 
     <Button
         android:id="@+id/buttonSaveEntry"
@@ -38,26 +38,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"/>
-    <Button
-        android:id="@+id/buttonUpdateEntry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aktualizuj wpis"
-        app:layout_constraintBottom_toTopOf="@+id/buttonDeleteEntry"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
-        android:visibility="gone"/>
-
-    <Button
-        android:id="@+id/buttonDeleteEntry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Usuń wpis"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
-        android:visibility="gone"/>
+        android:layout_margin="@dimen/margin_standard"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
