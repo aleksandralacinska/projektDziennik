@@ -37,6 +37,7 @@ class AddEntryActivity : AppCompatActivity() {
         }
 
         val mainLayout = findViewById<ConstraintLayout>(R.id.mainLayout)
+        val editTextEntryTitle = findViewById<EditText>(R.id.editTextEntryTitle)
         val editTextEntryContent = findViewById<EditText>(R.id.editTextEntryContent)
         val buttonSaveEntry = findViewById<Button>(R.id.buttonSaveEntry)
 
@@ -54,11 +55,12 @@ class AddEntryActivity : AppCompatActivity() {
         }
 
         buttonSaveEntry.setOnClickListener {
+            val title = editTextEntryTitle.text.toString()
             val content = editTextEntryContent.text.toString()
-            if (content.isNotBlank()) {
-                saveEntry(content)
+            if (title.isNotBlank() && content.isNotBlank()) {
+                saveEntry(title, content)
             } else {
-                Toast.makeText(this, "Treść wpisu nie może być pusta", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Tytuł i treść wpisu nie mogą być puste", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -75,13 +77,13 @@ class AddEntryActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveEntry(content: String) {
+    private fun saveEntry(title: String, content: String) {
         val db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "journal-database"
         ).build()
 
-        val newEntry = Entry(date = Date(), content = content)
+        val newEntry = Entry(title = title, date = Date(), content = content)
 
         Thread {
             db.entryDao().insert(newEntry)

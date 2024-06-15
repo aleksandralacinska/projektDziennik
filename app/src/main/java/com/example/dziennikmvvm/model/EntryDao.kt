@@ -17,8 +17,8 @@ interface EntryDao {
     @Query("SELECT * FROM entries WHERE id = :entryId")
     fun getEntryById(entryId: Int): Entry?
 
-    @Query("UPDATE entries SET content = :content WHERE id = :entryId")
-    fun updateEntryContent(entryId: Int, content: String)
+    @Query("UPDATE entries SET title = :title, content = :content WHERE id = :entryId")
+    fun updateEntry(entryId: Int, title: String, content: String)
 
     @Delete
     fun delete(entry: Entry)

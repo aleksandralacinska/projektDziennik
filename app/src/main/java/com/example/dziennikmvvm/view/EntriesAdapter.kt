@@ -9,7 +9,6 @@ import android.content.Intent
 import android.app.AlertDialog
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dziennikmvvm.R
 import com.example.dziennikmvvm.model.Entry
@@ -20,6 +19,7 @@ import java.util.*
 class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
 
     inner class EntryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val textViewTitle: TextView = view.findViewById(R.id.textViewTitle)
         val textViewContent: TextView = view.findViewById(R.id.textViewContent)
         val textViewDate: TextView = view.findViewById(R.id.textViewDate)
         val buttonEditEntry: Button = view.findViewById(R.id.buttonEditEntry)
@@ -34,6 +34,7 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
     override fun onBindViewHolder(holder: EntryViewHolder, position: Int) {
         val entry = entries[position]
         val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
+        holder.textViewTitle.text = entry.title
         holder.textViewDate.text = dateFormat.format(entry.date)
         holder.textViewContent.text = entry.content
 

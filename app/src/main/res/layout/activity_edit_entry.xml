@@ -20,11 +20,21 @@
         app:navigationIcon="@android:drawable/ic_menu_revert"/>
 
     <EditText
+        android:id="@+id/editTextEntryTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Tytuł wpisu"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
+    <EditText
         android:id="@+id/editTextEntryContent"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:hint="@string/entry_content"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:hint="Treść wpisu"
+        app:layout_constraintTop_toBottomOf="@id/editTextEntryTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/buttonSaveEntry"
@@ -34,7 +44,7 @@
         android:id="@+id/buttonSaveEntry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save_entry"
+        android:text="Zapisz wpis"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
