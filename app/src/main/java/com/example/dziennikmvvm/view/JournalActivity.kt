@@ -43,6 +43,11 @@ class JournalActivity : AppCompatActivity() {
         viewModel.loadEntries()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadEntries()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_journal, menu)
         return true

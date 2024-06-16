@@ -36,7 +36,7 @@ class DziennikViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch {
             val entriesList = withContext(Dispatchers.IO) {
                 db.entryDao().getAllEntries()
-            }
+            }.sortedByDescending { it.date }
             _entries.value = entriesList
         }
     }
@@ -52,7 +52,7 @@ class DziennikViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    //akutalizacja wpisu w bazie danych
+    //aktualizacja wpisu w bazie danych
     fun updateEntry(entryId: Int, title: String, content: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
