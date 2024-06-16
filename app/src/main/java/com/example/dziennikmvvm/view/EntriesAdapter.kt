@@ -1,25 +1,22 @@
 package com.example.dziennikmvvm.view
 
-
+import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Button
-import android.content.Intent
-import android.app.AlertDialog
-import android.content.Context
-import androidx.room.Room
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.example.dziennikmvvm.R
-import com.example.dziennikmvvm.model.Entry
 import com.example.dziennikmvvm.model.AppDatabase
+import com.example.dziennikmvvm.model.Entry
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
-
 
     inner class EntryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textViewTitle: TextView = view.findViewById(R.id.textViewTitle)
@@ -29,12 +26,10 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
         val buttonDeleteEntry: Button = view.findViewById(R.id.buttonDeleteEntry)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_entry, parent, false)
         return EntryViewHolder(view)
     }
-
 
     override fun onBindViewHolder(holder: EntryViewHolder, position: Int) {
         val entry = entries[position]
@@ -55,10 +50,7 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
         holder.buttonDeleteEntry.setOnClickListener {
             showDeleteConfirmationDialog(holder.itemView.context, entry, position)
         }
-
-
     }
-
 
     override fun getItemCount(): Int {
         return entries.size
@@ -88,7 +80,6 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
             context.applicationContext,
             AppDatabase::class.java, "journal-database"
         ).build()
-
 
         Thread {
             db.entryDao().delete(entry)

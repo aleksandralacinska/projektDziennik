@@ -1,8 +1,8 @@
 package com.example.dziennikmvvm.view
 
-
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -19,29 +19,23 @@ import com.example.dziennikmvvm.model.Entry
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class AddEntryActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_entry)
 
-
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-
 
         //pobranie aktualnej daty i ustawienie jako tytuł na górnym pasku Toolbar
         val currentDate = getCurrentDate()
         toolbar.title = currentDate
 
-
         //obsługa kliknięcia przycisku "powrót"
         toolbar.setNavigationOnClickListener {
             finish()
         }
-
 
         val mainLayout = findViewById<ConstraintLayout>(R.id.mainLayout)
         val editTextEntryTitle = findViewById<EditText>(R.id.editTextEntryTitle)
@@ -55,7 +49,6 @@ class AddEntryActivity : AppCompatActivity() {
             }
             false
         }
-
 
         editTextEntryContent.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
@@ -100,6 +93,7 @@ class AddEntryActivity : AppCompatActivity() {
 
         Thread {
             db.entryDao().insert(newEntry)
+            Log.d("AddEntryActivity", "New entry added: $newEntry")
             runOnUiThread {
                 Toast.makeText(this, "Wpis został zapisany", Toast.LENGTH_SHORT).show()
                 finish()
