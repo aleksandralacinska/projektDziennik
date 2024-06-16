@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         val editTextPin = findViewById<EditText>(R.id.editTextPin)
         val buttonSubmit = findViewById<Button>(R.id.buttonSubmit)
 
+        //obsługa przycisku "zaloguj"
         buttonSubmit.setOnClickListener {
             val enteredPin = editTextPin.text.toString()
             if (enteredPin == correctPin) {
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //przekierowanie do ekranu powitalnego
     private fun navigateToHomeScreen() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)

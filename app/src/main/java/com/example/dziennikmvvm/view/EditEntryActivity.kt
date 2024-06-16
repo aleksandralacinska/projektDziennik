@@ -48,6 +48,7 @@ class EditEntryActivity : AppCompatActivity() {
         }
     }
 
+    //ładowanie danych wpisu po jego id
     private fun loadEntry(entryId: Int) {
         val db = Room.databaseBuilder(
             applicationContext,
@@ -62,7 +63,7 @@ class EditEntryActivity : AppCompatActivity() {
             }
         }.start()
     }
-
+    //aktualizacja wpisu w bazie danych
     private fun updateEntry(entryId: Int, title: String, content: String) {
         val db = Room.databaseBuilder(
             applicationContext,

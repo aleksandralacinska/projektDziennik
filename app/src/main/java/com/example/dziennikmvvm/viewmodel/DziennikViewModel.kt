@@ -31,6 +31,7 @@ class DziennikViewModel(application: Application) : AndroidViewModel(application
         _dziennikData.value = DziennikData()
     }
 
+    //ładowanie wszystkich wpisów z bazy danych
     fun loadEntries() {
         viewModelScope.launch {
             val entriesList = withContext(Dispatchers.IO) {
@@ -40,6 +41,7 @@ class DziennikViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    //dodawanie nowego wpisu do bazy danych
     fun addEntry(title: String, content: String) {
         viewModelScope.launch {
             val newEntry = Entry(title = title, date = Date(), content = content)
@@ -50,6 +52,7 @@ class DziennikViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    //akutalizacja wpisu w bazie danych
     fun updateEntry(entryId: Int, title: String, content: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -59,6 +62,7 @@ class DziennikViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    //usuwanie wpisu z bazy danych
     fun deleteEntry(entry: Entry) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {

@@ -46,7 +46,7 @@ class DayActivity : AppCompatActivity() {
         loadEntries(date)
     }
 
-
+    //ładowanie wpisów dla wybranej daty
     private fun loadEntries(date: Date) {
         val db = Room.databaseBuilder(
             applicationContext,

@@ -43,7 +43,7 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
         holder.textViewDate.text = dateFormat.format(entry.date)
         holder.textViewContent.text = entry.content
 
-
+        //obsługa przycisku edycji wpisu
         holder.buttonEditEntry.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, EditEntryActivity::class.java)
@@ -51,7 +51,7 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
             context.startActivity(intent)
         }
 
-
+        //obsługa przycisku usuwania wpisu
         holder.buttonDeleteEntry.setOnClickListener {
             showDeleteConfirmationDialog(holder.itemView.context, entry, position)
         }
@@ -64,13 +64,13 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
         return entries.size
     }
 
-
+    //aktualizacja listy wpisów
     fun updateEntries(newEntries: List<Entry>) {
         entries = newEntries
         notifyDataSetChanged()
     }
 
-
+    //okienko modalne przy usuwaniu wpisu
     private fun showDeleteConfirmationDialog(context: Context, entry: Entry, position: Int) {
         AlertDialog.Builder(context).apply {
             setTitle("Usuń wpis")
@@ -82,7 +82,7 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
         }.create().show()
     }
 
-
+    //usuwanie wpisu z bazy danych
     private fun deleteEntry(context: Context, entry: Entry, position: Int) {
         val db = Room.databaseBuilder(
             context.applicationContext,

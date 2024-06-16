@@ -32,12 +32,12 @@ class AddEntryActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
 
-        // Pobierz aktualną datę i ustaw jako tytuł Toolbar
+        //pobranie aktualnej daty i ustawienie jako tytuł na górnym pasku Toolbar
         val currentDate = getCurrentDate()
         toolbar.title = currentDate
 
 
-        // Obsługa kliknięcia przycisku "powrót"
+        //obsługa kliknięcia przycisku "powrót"
         toolbar.setNavigationOnClickListener {
             finish()
         }
@@ -48,7 +48,7 @@ class AddEntryActivity : AppCompatActivity() {
         val editTextEntryContent = findViewById<EditText>(R.id.editTextEntryContent)
         val buttonSaveEntry = findViewById<Button>(R.id.buttonSaveEntry)
 
-
+        //ukrywanie klawiatury po kliknięciu na ekran poza nią lub poza polem tekstowym
         mainLayout.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 hideKeyboard()
@@ -63,7 +63,7 @@ class AddEntryActivity : AppCompatActivity() {
             }
         }
 
-
+        //zapisywanie wpisu w dzienniku
         buttonSaveEntry.setOnClickListener {
             val title = editTextEntryTitle.text.toString()
             val content = editTextEntryContent.text.toString()
@@ -75,13 +75,13 @@ class AddEntryActivity : AppCompatActivity() {
         }
     }
 
-
+    //pobranie aktualnej daty w formacie dd-MM-yyyy
     private fun getCurrentDate(): String {
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         return dateFormat.format(Date())
     }
 
-
+    //ukrywanie klawiatury
     private fun hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         if (imm.isActive) {
@@ -89,6 +89,7 @@ class AddEntryActivity : AppCompatActivity() {
         }
     }
 
+    //zapisywanie nowego wpisu w bazie danych
     private fun saveEntry(title: String, content: String) {
         val db = Room.databaseBuilder(
             applicationContext,
@@ -101,7 +102,7 @@ class AddEntryActivity : AppCompatActivity() {
             db.entryDao().insert(newEntry)
             runOnUiThread {
                 Toast.makeText(this, "Wpis został zapisany", Toast.LENGTH_SHORT).show()
-                finish() // Zamknij aktywność po zapisaniu wpisu
+                finish()
             }
         }.start()
     }

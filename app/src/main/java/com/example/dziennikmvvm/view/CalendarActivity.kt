@@ -20,14 +20,14 @@ class CalendarActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        // Obsługa kliknięcia przycisku "powrót"
+        //obsługa kliknięcia przycisku "powrót"
         toolbar.setNavigationOnClickListener {
             finish()
         }
 
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
 
-        // Konfiguracja kalendarza
+        //konfiguracja kalendarza
         val minDate = Calendar.getInstance().apply {
             set(Calendar.YEAR, 2000)
         }
@@ -41,6 +41,7 @@ class CalendarActivity : AppCompatActivity() {
         loadEntriesAndMarkDates(calendarView)
     }
 
+    //ładowanie wpisów i oznaczanie dat w kalendarzu
     private fun loadEntriesAndMarkDates(calendarView: CalendarView) {
         val db = Room.databaseBuilder(
             applicationContext,

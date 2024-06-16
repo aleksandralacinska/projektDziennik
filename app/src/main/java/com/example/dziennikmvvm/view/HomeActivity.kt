@@ -25,11 +25,11 @@ class HomeActivity : AppCompatActivity() {
             welcomeTextView.text = data.welcomeMessage
         }
 
-        // Przekierowanie po 3 sekundach
+        //przekierowanie po 3sek.
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, JournalActivity::class.java)
             startActivity(intent)
             finish()
-        }, 3000) // 3000 ms = 3 sekundy
+        }, 3000)
     }
 }

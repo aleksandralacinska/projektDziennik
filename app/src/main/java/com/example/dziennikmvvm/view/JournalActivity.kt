@@ -24,7 +24,7 @@ class JournalActivity : AppCompatActivity() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        // Obsługa kliknięcia przycisku "+"
+        //obsługa kliknięcia przycisku "+"
         val fabAddEntry = findViewById<FloatingActionButton>(R.id.fab_add_entry)
         fabAddEntry.setOnClickListener {
             val intent = Intent(this, AddEntryActivity::class.java)
