@@ -2,6 +2,7 @@ package com.example.dziennikmvvm.view
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -92,6 +93,7 @@ class AddEntryActivity : AppCompatActivity() {
 
         Thread {
             db.entryDao().insert(newEntry)
+            Log.d("AddEntryActivity", "New entry added: $newEntry")
             runOnUiThread {
                 Toast.makeText(this, "Wpis został zapisany", Toast.LENGTH_SHORT).show()
                 finish()
