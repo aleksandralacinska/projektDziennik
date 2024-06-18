@@ -29,12 +29,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
 
+    <TextView
+        android:id="@+id/textViewLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Lokalizacja"
+        app:layout_constraintTop_toBottomOf="@id/editTextEntryTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
     <EditText
         android:id="@+id/editTextEntryContent"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="Treść wpisu"
-        app:layout_constraintTop_toBottomOf="@id/editTextEntryTitle"
+        app:layout_constraintTop_toBottomOf="@id/textViewLocation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/buttonSaveEntry"

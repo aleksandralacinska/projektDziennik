@@ -1,18 +1,18 @@
 package com.example.dziennikmvvm.view
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.Button
+import android.content.Intent
+import android.app.AlertDialog
+import android.content.Context
 import androidx.room.Room
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dziennikmvvm.R
-import com.example.dziennikmvvm.model.AppDatabase
 import com.example.dziennikmvvm.model.Entry
+import com.example.dziennikmvvm.model.AppDatabase
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,6 +20,7 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
 
     inner class EntryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textViewTitle: TextView = view.findViewById(R.id.textViewTitle)
+        val textViewLocation: TextView = view.findViewById(R.id.textViewLocation) // nowe pole
         val textViewContent: TextView = view.findViewById(R.id.textViewContent)
         val textViewDate: TextView = view.findViewById(R.id.textViewDate)
         val buttonEditEntry: Button = view.findViewById(R.id.buttonEditEntry)
@@ -35,6 +36,7 @@ class EntriesAdapter(private var entries: List<Entry>) : RecyclerView.Adapter<En
         val entry = entries[position]
         val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
         holder.textViewTitle.text = entry.title
+        holder.textViewLocation.text = entry.location // nowe pole
         holder.textViewDate.text = dateFormat.format(entry.date)
         holder.textViewContent.text = entry.content
 
